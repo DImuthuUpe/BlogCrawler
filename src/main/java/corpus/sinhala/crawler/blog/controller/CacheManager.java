@@ -2,19 +2,8 @@ package corpus.sinhala.crawler.blog.controller;
 
 
 
-import com.sun.tools.doclets.internal.toolkit.resources.doclets;
-import corpus.sinhala.crawler.blog.rss.beans.Post;
-import javanet.staxutils.IndentingXMLStreamWriter;
-import org.apache.axiom.om.OMAbstractFactory;
-import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMFactory;
-import org.apache.axiom.om.util.StAXUtils;
 
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

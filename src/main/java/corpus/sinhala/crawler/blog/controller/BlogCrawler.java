@@ -7,10 +7,8 @@ package corpus.sinhala.crawler.blog.controller;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import corpus.sinhala.crawler.blog.rss.RssWebDriver;
-import org.apache.http.HttpStatus;
 
 
 /**
