@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package corpus.sinhala.crawler.blog.rss;
+package corpus.sinhala.crawler.blog.rss.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Feed {
     final String language;
     final String copyright;
     final String pubDate;
-    List<FeedMessage> entries = new ArrayList<FeedMessage>();
+    private List<FeedMessage> entries = new ArrayList<FeedMessage>();
     private String blogId;
     public Feed(String title, String link, String description, String language,
             String copyright, String pubDate) {
@@ -67,6 +67,14 @@ public class Feed {
 
     public String getPubDate() {
         return pubDate;
+    }
+
+    public List<FeedMessage> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<FeedMessage> entries) {
+        this.entries = entries;
     }
 
     @Override

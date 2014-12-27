@@ -6,10 +6,12 @@ package corpus.sinhala.crawler.blog.rss;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import corpus.sinhala.crawler.blog.controller.CacheManager;
+import corpus.sinhala.crawler.blog.controller.XMLFileWriter;
+import corpus.sinhala.crawler.blog.rss.beans.Feed;
+import corpus.sinhala.crawler.blog.rss.beans.FeedMessage;
+import corpus.sinhala.crawler.blog.rss.beans.Post;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -97,61 +99,24 @@ public class RssSearcher extends Thread {
                             }
                             if (!contains) {
                                 BufferedWriter writer = null;
-                                try {
-                                    writer = new BufferedWriter(new FileWriter("./Blog.xml", true));
-                                    writer.write("<post>\n");
-                                    writer.write("<link>");
-                                    writer.write(this.url);
-                                    //System.out.println(this.url);
-                                    writer.write("</link>\n");
-                                    writer.write("<topic>");
-                                    writer.write(message.getTitle());
-                                    writer.write("</topic>\n");
-                                    writer.write("<date>");
-                                    writer.write(message.getDate());
-                                    writer.write("</date>\n");
-                                    writer.write("<author>");
-                                    writer.write(message.getAuthor());
-                                    writer.write("</author>\n");
-                                    writer.write("<content>");
-                                    writer.write(getAcceptedSentences(message.getDescription()));
-                                    writer.write("</content>\n");
-                                    writer.write("</post>\n");
 
-                                    writer.flush();
-                                    writer.close();
+                                Post post = new Post();
+                                post.setLink(this.url);
+                                post.setTopic(message.getTitle());
+                                post.setCategory("BLOG");
+                                post.setAuthor(message.getAuthor());
+                                post.setContent(getAcceptedSentences(message.getDescription()));
 
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
+                                String date = message.getDate();
+                                date = date.split("T")[0];
+                                String parts[] = date.split("-");
+                                post.setYear((parts[0]));
+                                post.setMonth((parts[1]));
+                                post.setDay((parts[2]));
+
+                                XMLFileWriter.getInstance().addPost(post);
 
 
-                                try {
-                                    writer = new BufferedWriter(new FileWriter("./BlogRaw.xml", true));
-                                    writer.write("<post>\n");
-                                    writer.write("<link>");
-                                    writer.write(this.url);
-                                    writer.write("</link>\n");
-                                    writer.write("<topic>");
-                                    writer.write(message.getRawTitle());
-                                    writer.write("</topic>\n");
-                                    writer.write("<date>");
-                                    writer.write(message.getDate());
-                                    writer.write("</date>\n");
-                                    writer.write("<author>");
-                                    writer.write(message.getAuthor());
-                                    writer.write("</author>\n");
-                                    writer.write("<content>");
-                                    writer.write(message.getRawDes());
-                                    writer.write("</content>\n");
-                                    writer.write("</post>\n");
-
-                                    writer.flush();
-                                    writer.close();
-
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
                             }
 
                         }

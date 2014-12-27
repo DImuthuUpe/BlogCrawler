@@ -1,6 +1,20 @@
 package corpus.sinhala.crawler.blog.controller;
 
+
+
+import com.sun.tools.doclets.internal.toolkit.resources.doclets;
+import corpus.sinhala.crawler.blog.rss.beans.Post;
+import javanet.staxutils.IndentingXMLStreamWriter;
+import org.apache.axiom.om.OMAbstractFactory;
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.OMFactory;
+import org.apache.axiom.om.util.StAXUtils;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,8 +26,15 @@ public class CacheManager {
 
     private static CacheManager instance=null;
 
+
     private CacheManager(){
+
+        init();
+    }
+
+    private void init() {
         deserializeCache();
+        deserializeFileID();
     }
 
     public static CacheManager getInstance(){
@@ -25,6 +46,8 @@ public class CacheManager {
 
     public Map<String, Set<String>> postCache=null;
 
+
+
     public synchronized void serializeCache(){
         try
         {
@@ -32,6 +55,22 @@ public class CacheManager {
             FileOutputStream fileOut = new FileOutputStream("cache.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(postCache);
+            out.close();
+            fileOut.close();
+            //System.out.printf("Serialized data is saved in cache.ser");
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+        }
+    }
+
+    public synchronized void serializeFileId(Integer fileId){
+        try
+        {
+
+            FileOutputStream fileOut = new FileOutputStream("fileID.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(fileId);
             out.close();
             fileOut.close();
             //System.out.printf("Serialized data is saved in cache.ser");
@@ -61,4 +100,29 @@ public class CacheManager {
             postCache = new HashMap<>();
         }
     }
+
+    public synchronized Integer deserializeFileID(){
+        Integer fileId =null;
+        try
+        {
+            FileInputStream fileIn = new FileInputStream("fileID.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            fileId = (Integer) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+        }catch(ClassNotFoundException c)
+        {
+            //logger.error(c);
+            c.printStackTrace();
+        }
+        if(fileId==null){
+            fileId = 0;
+        }
+        return fileId;
+    }
+
+
 }

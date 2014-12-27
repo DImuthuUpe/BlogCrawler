@@ -20,6 +20,9 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
+
+import corpus.sinhala.crawler.blog.rss.beans.Feed;
+import corpus.sinhala.crawler.blog.rss.beans.FeedMessage;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -133,7 +136,7 @@ public class RSSFeedParser {
             ex.printStackTrace();
         }
         Feed feed= new Feed(null, null, null, null, null, null);
-        feed.entries =feeds;
+        feed.setEntries(feeds);
         return feed;
     }
     
