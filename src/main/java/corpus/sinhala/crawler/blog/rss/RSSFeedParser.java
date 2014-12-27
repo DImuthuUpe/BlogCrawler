@@ -77,7 +77,7 @@ public class RSSFeedParser {
                         case CHANNEL:
                             event = eventReader.nextEvent();
                             atomId = getCharacterData(event, eventReader);
-                            System.out.println("Atom Id "+atomId );
+                            //System.out.println("Atom Id "+atomId );
                             return atomId.split("-")[1];
                     }
                 }
@@ -96,8 +96,8 @@ public class RSSFeedParser {
         try{
             DefaultHttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet("https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts?key=AIzaSyAKoNUtkiL1Xd_XQryUnqNgDEPhUEgQnRo");
-            System.out.println("Get Url ");
-            System.out.println("https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts?key=AIzaSyAKoNUtkiL1Xd_XQryUnqNgDEPhUEgQnRo");
+            //System.out.println("Get Url ");
+            //System.out.println("https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts?key=AIzaSyAKoNUtkiL1Xd_XQryUnqNgDEPhUEgQnRo");
             get.setHeader("Accept", "*/*");
             HttpResponse response = client.execute(get);
             String json = EntityUtils.toString(response.getEntity());

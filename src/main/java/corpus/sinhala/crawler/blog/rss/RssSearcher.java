@@ -11,9 +11,7 @@ import java.util.logging.Logger;
 
 import corpus.sinhala.crawler.blog.controller.CacheManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * @author pancha
@@ -74,13 +72,10 @@ public class RssSearcher extends Thread {
                         //System.out.println(s[s.length - 1]);
                         RSSFeedParser parser = new RSSFeedParser(s[s.length - 1]);
                         String blogId = parser.getBlogId();
-                        System.out.println(blogId);
+                        //System.out.println(blogId);
                         Feed feed = parser.getFeed(blogId);
                         for (FeedMessage message : feed.getMessages()) {
-                            //String s2[] = {message.getAuthor(), "", message.getTitle(), message.getDescription()};
-                            //SQLCommunicator.InsertInToTable("lankadeepa", s2);
-                            //PrintStream out = new PrintStream(System.out, true, "UTF-8");
-                            //out.println(message);
+
 
                             boolean contains = false;
                             String postId = message.getId();

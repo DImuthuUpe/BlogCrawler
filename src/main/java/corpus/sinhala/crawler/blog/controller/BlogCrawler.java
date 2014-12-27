@@ -23,7 +23,9 @@ public class BlogCrawler {
     
     
     public void generateUrl(){
+        HathmaluwaParser parser = new HathmaluwaParser();
         for (int i = 2; i < 328; i++) {
+            try{
                 if (RssWebDriver.getInstance().getThreads() > 10) {
                     i--;
                     try {
@@ -36,28 +38,26 @@ public class BlogCrawler {
                 String pageURL = "http://www.hathmaluwa.org/index/index/page/" + i;
 
                 System.out.println("**********Crawling**********" + pageURL);
+                parser.parse(pageURL);
 
-                BufferedWriter writer = null;
-                try {
-                    writer = new BufferedWriter(new FileWriter("./metadata.xml", true));
-                    writer.write(pageURL + "\n");
-                    writer.flush();
-                    writer.close();
+                BufferedWriter writer = new BufferedWriter(new FileWriter("./metadata.xml", true));
+                writer.write(pageURL + "\n");
+                writer.flush();
+                writer.close();
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+
                 //processPage(pageURL);
+            }catch(Exception ex){
+                ex.printStackTrace();
             }
+        }
     }
     
     
     
     
     public static void main(String[] args) {
-        //BlogCrawler crawler = new BlogCrawler();
-        //crawler.generateUrl();
-        HathmaluwaParser parser = new HathmaluwaParser();
-        parser.parse();
+        BlogCrawler crawler = new BlogCrawler();
+        crawler.generateUrl();
     }
 }

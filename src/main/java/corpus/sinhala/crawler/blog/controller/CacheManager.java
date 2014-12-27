@@ -34,7 +34,7 @@ public class CacheManager {
             out.writeObject(postCache);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in cache.ser");
+            //System.out.printf("Serialized data is saved in cache.ser");
         }catch(IOException i)
         {
             i.printStackTrace();

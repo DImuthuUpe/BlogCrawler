@@ -21,9 +21,9 @@ import org.jsoup.select.Elements;
 public class HathmaluwaParser {
     Document doc;
     HashSet<String> urls = new HashSet<>();
-    public void parse(){
+    public void parse(String path){
         try {
-            doc = Jsoup.connect("http://www.hathmaluwa.org/index/index/page/315").get();
+            doc = Jsoup.connect(path).get();
             Elements divs = doc.getElementsByTag("div");
             Iterator<Element> it = divs.iterator();
             
