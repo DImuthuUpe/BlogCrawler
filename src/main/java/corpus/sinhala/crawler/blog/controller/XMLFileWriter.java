@@ -76,7 +76,7 @@ public class XMLFileWriter {
         }
         docs = new ArrayList<>();
         Integer fileId = CacheManager.getInstance().deserializeFileID();
-        String path = fileId+".xml";
+        String path = "data/"+fileId+".xml";
 
         try{
             OutputStream out = new FileOutputStream(path);
@@ -99,7 +99,7 @@ public class XMLFileWriter {
     public synchronized void addPost(Post post){
         OMElement ePost = createPostElement(post);
         docs.add(ePost);
-        if(docs.size()>20){
+        if(docs.size()>200){
             writeToFile();
         }
     }
