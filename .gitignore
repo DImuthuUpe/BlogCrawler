@@ -5,3 +5,5 @@ BlogRaw.xml
 corpus.sinhala.crowler.iml
 cache.ser
 metadata.xml
+data/*
+fileID.ser

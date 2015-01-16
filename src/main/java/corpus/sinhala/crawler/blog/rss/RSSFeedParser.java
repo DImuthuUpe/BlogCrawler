@@ -94,7 +94,7 @@ public class RSSFeedParser {
     }
     
     
-    public Feed getFeed(String blogId){
+    public Feed getFeed(String blogId){  //test here
         List<FeedMessage> feeds = new ArrayList<>();
         try{
             DefaultHttpClient client = new DefaultHttpClient();

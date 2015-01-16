@@ -60,12 +60,12 @@ public class RssSearcher extends Thread {
                 Thread.sleep(10);
 
             }
-            driver.get("http://feedburner.google.com/fb/a/myfeeds");
+            driver.get("http://feedburner.google.com/fb/a/myfeeds"); //test here
             WebElement element = driver.findElement(By.name("sourceUrl"));
             element.sendKeys(url);
             element.submit();
 
-            List<WebElement> elements = driver.findElements(By.className("checkboxLabel"));
+            List<WebElement> elements = driver.findElements(By.className("checkboxLabel")); //test here
             for (int i = 0; i < elements.size(); i++) {
 
                 try {
@@ -75,7 +75,7 @@ public class RssSearcher extends Thread {
                         RSSFeedParser parser = new RSSFeedParser(s[s.length - 1]);
                         String blogId = parser.getBlogId();
                         //System.out.println(blogId);
-                        Feed feed = parser.getFeed(blogId);
+                        Feed feed = parser.getFeed(blogId);  //test here
                         for (FeedMessage message : feed.getMessages()) {
 
 

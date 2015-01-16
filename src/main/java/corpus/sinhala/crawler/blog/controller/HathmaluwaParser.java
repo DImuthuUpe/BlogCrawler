@@ -19,11 +19,11 @@ import org.jsoup.select.Elements;
  * @author dimuthuupeksha
  */
 public class HathmaluwaParser {
-    Document doc;
+
     HashSet<String> urls = new HashSet<>();
     public void parse(String path){
         try {
-            doc = Jsoup.connect(path).get();
+            Document doc = getDoc(path);
             Elements divs = doc.getElementsByTag("div");
             Iterator<Element> it = divs.iterator();
             
@@ -41,5 +41,10 @@ public class HathmaluwaParser {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public Document getDoc(String path) throws IOException {
+        Document doc = Jsoup.connect(path).get();
+        return doc;
     }
 }
